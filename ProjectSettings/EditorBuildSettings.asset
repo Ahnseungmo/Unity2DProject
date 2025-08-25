@@ -8,6 +8,30 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SQLTestScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/BattleScene.unity
+    guid: 1d7549c488b2d0d44a3702f235e41e3f
+  - enabled: 1
+    path: Assets/Scenes/BattleCharacterScene.unity
+    guid: 65fd5a570b895a34d9cff5d8b2567913
+  - enabled: 1
+    path: Assets/Scenes/CharacterSelectScene.unity
+    guid: 3b5560ab65f84364c94a0391d136c5ff
+  - enabled: 1
+    path: Assets/Scenes/GridTestScene.unity
+    guid: 25876a756c1b96e4497e5437a779e568
+  - enabled: 1
+    path: Assets/Scenes/InputActionTestScene.unity
+    guid: dd63c7d9e85d65b49a2c1e7ff5bf1582
+  - enabled: 1
+    path: Assets/Scenes/Map2Scene.unity
+    guid: 9dad1691d652c804baa8382cd7d463b8
+  - enabled: 1
+    path: Assets/Scenes/MapScene.unity
+    guid: be4a1c6583ed3c64aa1b403de262b402
+  - enabled: 1
+    path: Assets/Scenes/MiniGameScene.unity
+    guid: d76e5c977a677b8428a2acff1a29f33a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
