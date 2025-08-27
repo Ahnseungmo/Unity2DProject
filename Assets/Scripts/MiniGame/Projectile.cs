@@ -14,12 +14,17 @@ public class Projectile : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    private void Start()
+    {
+        rb.bodyType = RigidbodyType2D.Kinematic;
+
+    }
     void OnMouseDown()
     {
         dragStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         isDragging = true;
         rb.linearVelocity = Vector2.zero;
-        rb.bodyType = RigidbodyType2D.Kinematic; 
+
     }
 
     void OnMouseDrag()
