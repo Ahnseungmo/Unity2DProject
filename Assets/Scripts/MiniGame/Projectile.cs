@@ -19,7 +19,7 @@ public class Projectile : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Kinematic;
 
     }
-    void OnMouseDown()
+    private void OnMouseDown()
     {
         dragStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         isDragging = true;
@@ -27,7 +27,7 @@ public class Projectile : MonoBehaviour
 
     }
 
-    void OnMouseDrag()
+    private void OnMouseDrag()
     {
         if (!isDragging) return;
 
