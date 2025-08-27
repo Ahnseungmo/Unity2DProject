@@ -6,9 +6,8 @@ public class Projectile : MonoBehaviour
     private Vector2 dragStartPos;
     private bool isDragging = false;
 
-    [SerializeField] private float power = 5f;   
-    [SerializeField] private float maxDrag = 3f; 
-
+    [SerializeField] private float power = 10f;
+    [SerializeField] private float maxDrag = 2f;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -21,7 +20,9 @@ public class Projectile : MonoBehaviour
     }
     private void OnMouseDown()
     {
+
         dragStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        
         isDragging = true;
         rb.linearVelocity = Vector2.zero;
 
@@ -42,7 +43,7 @@ public class Projectile : MonoBehaviour
         Vector2 launchDir = dragStartPos - newPos;
 
         float angle = Mathf.Atan2(launchDir.y, launchDir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        transform.rotation = Quaternion.Euler(0, 0, angle + -90);
     }
 
     void OnMouseUp()
@@ -56,5 +57,6 @@ public class Projectile : MonoBehaviour
         Vector2 launchDir = dragStartPos - (Vector2)transform.position;
 
         rb.AddForce(launchDir * power, ForceMode2D.Impulse);
+      
     }
 }
