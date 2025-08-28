@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cf186ad18cb956149a2a487ab5843d25
+guid: ac211f0d42420784bbd68823f8d81f51
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -39,15 +39,15 @@ TextureImporter:
     mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: 1
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
   spriteMode: 1
-  spriteExtrude: 1
+  spriteExtrude: 0
   spriteMeshType: 1
   alignment: 9
-  spritePivot: {x: 0.515625, y: 0.25}
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -69,10 +69,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 32
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -82,36 +82,23 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
     buildTarget: Standalone
-    maxTextureSize: 32
+    maxTextureSize: 64
     resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
+    textureFormat: 12
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
-    maxTextureSize: 32
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
+    overridden: 1
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
     buildTarget: Android
-    maxTextureSize: 32
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -125,28 +112,20 @@ TextureImporter:
     outline: []
     customData: 
     physicsShape:
-    - - {x: 2, y: -10}
-      - {x: 2, y: -7}
+    - - {x: 7, y: -3}
+      - {x: 7, y: 8}
+      - {x: 3, y: 8}
+      - {x: 2, y: 7}
+      - {x: -2, y: 7}
+      - {x: -3, y: 8}
+      - {x: -7, y: 8}
+      - {x: -7, y: -3}
+      - {x: -6, y: -5}
+      - {x: -4, y: -7}
+      - {x: -2, y: -8}
+      - {x: 2, y: -8}
       - {x: 4, y: -7}
-      - {x: 5, y: -6}
-      - {x: 6, y: -4}
-      - {x: 6, y: -2}
-      - {x: 3, y: -2}
-      - {x: 3, y: 9}
-      - {x: 2, y: 11}
-      - {x: 1, y: 12}
-      - {x: 0, y: 12}
-      - {x: -1, y: 11}
-      - {x: -2, y: 9}
-      - {x: -2, y: -2}
-      - {x: -5, y: -2}
-      - {x: -5, y: -4}
-      - {x: -4, y: -6}
-      - {x: -3, y: -7}
-      - {x: -1, y: -7}
-      - {x: -1, y: -10}
-      - {x: 0, y: -11}
-      - {x: 1, y: -11}
+      - {x: 6, y: -5}
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
     internalID: 1537655665

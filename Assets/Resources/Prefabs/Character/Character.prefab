@@ -15183,7 +15183,8 @@ MonoBehaviour:
   SpumAnimationData: []
   IDLE_List: []
   MOVE_List: []
-  ATTACK_List: []
+  ATTACK_List:
+  - {fileID: 0}
   DAMAGED_List: []
   DEBUFF_List: []
   DEATH_List: []
