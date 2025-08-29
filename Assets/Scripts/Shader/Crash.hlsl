@@ -1,38 +1,26 @@
 ﻿void Crash_float(UnityTexture2D MainTex, UnityTexture2D CrashTex, float2 UV, float4 color, float value, out float4 RGBA)
 {
-    // 기본 색상을 MainTex에서 가져옵니다.
+//    value = 0.8;
+    // 원본 텍스처 색상
     float4 basecolor = MainTex.Sample(MainTex.samplerstate, UV);
-    
+
+    // CrashTex 알파
     float crashMask = CrashTex.Sample(CrashTex.samplerstate, UV).a;
-    // CrashTex에서 파괴 마스크 값을 가져옵니다.
-//    float crashMask = tex2D(CrashTex, UV).a;
-    value = 0.5;
-    // 파괴 진행 정도에 따라 색상 처리
-    // 'value'가 0일 때는 파괴가 전혀 일어나지 않음, value가 1일 때 완전히 파괴된 상태
-    float dissolveAmount = smoothstep(0.0, 1.0, crashMask - value);
 
+    // 중심 거리 (0=중심, 0.7~1.0=가장자리)
+    float2 center = float2(0.5, 0.5);
+    float dist = distance(UV, center) * 2;
 
-    
-    float finalAlpha = 1.0 - dissolveAmount;
-    
-    if (crashMask > 0 && basecolor.a > 0)
-    {
-        RGBA = lerp(basecolor, color, dissolveAmount);
-//        RGBA.a = finalAlpha; // 최종 알파 값 수정
-
-    }
-    else
-    {
-        RGBA = basecolor;
-
-    }
-    
-    
-//    color.a = finalAlpha;
+    // 중심에서 value 반경만큼 퍼지도록 dissolveMask 생성
+    float dissolveMask = (value > 0.0) ? 1.0 - smoothstep(value - 0.05, value + 0.05, dist) : 0;
 
     
-    float4 texColor = CrashTex.Sample(CrashTex.samplerstate, UV);
-    texColor.rgb *= texColor.a;
-    RGBA = texColor;
+    // crashMask가 있는 부분만 파괴
+    dissolveMask *= crashMask;
 
+    // basecolor → color 로 보간
+    RGBA = lerp(basecolor, color, dissolveMask);
+
+    // 알파도 같이 줄어듦
+    RGBA.a = basecolor.a * (1.0 - dissolveMask);
 }

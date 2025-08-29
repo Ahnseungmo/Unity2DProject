@@ -32,7 +32,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CrashMap:
-        m_Texture: {fileID: 2800000, guid: 89950bae7d85a6a42a3135bd1c3ae9be, type: 3}
+        m_Texture: {fileID: 2800000, guid: 866f42d88ac84fa4f915007f42fcdcfa, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:

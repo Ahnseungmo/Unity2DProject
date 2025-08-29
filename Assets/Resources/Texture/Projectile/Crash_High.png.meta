@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 866f42d88ac84fa4f915007f42fcdcfa
+guid: 89950bae7d85a6a42a3135bd1c3ae9be
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -116,10 +116,10 @@ TextureImporter:
       name: Crash_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 32
-        height: 32
+        x: 5
+        y: 7
+        width: 115
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

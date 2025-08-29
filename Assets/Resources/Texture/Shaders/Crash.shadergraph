@@ -324,8 +324,8 @@
     "m_CustomSlotLabel": "",
     "m_DismissedVersion": 0,
     "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
+    "overrideHLSLDeclaration": true,
+    "hlslDeclarationOverride": 2,
     "m_Hidden": false,
     "m_Value": 0.0,
     "m_FloatType": 0,
@@ -388,7 +388,7 @@
             "r": 0.0,
             "g": 0.0,
             "b": 0.0,
-            "a": 0.0
+            "a": 1.0
         },
         "mode": 0
     }
@@ -582,11 +582,11 @@
     "m_CustomSlotLabel": "",
     "m_DismissedVersion": 0,
     "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
+    "overrideHLSLDeclaration": true,
+    "hlslDeclarationOverride": 2,
     "m_Hidden": false,
     "m_Value": {
-        "m_SerializedTexture": "",
+        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"866f42d88ac84fa4f915007f42fcdcfa\",\"type\":3}}",
         "m_Guid": ""
     },
     "isMainTexture": false,
