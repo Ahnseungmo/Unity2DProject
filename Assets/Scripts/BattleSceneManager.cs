@@ -7,7 +7,7 @@ public class BattleSceneManager : MonoBehaviour
     void Start()
     {
         /*
-        SceneManager.LoadScene("BattleCharacterScene", LoadSceneMode.Additive);
+         SceneManager.LoadScene("BattleCharacterScene", LoadSceneMode.Additive);
         SceneManager.LoadScene("MiniGameScene", LoadSceneMode.Additive);
         */
     }
