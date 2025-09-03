@@ -13,8 +13,8 @@ public class SQLTestManager : MonoBehaviour
         // 캐릭터 추가
         var newChar = new Character
         {
-            Name = "Knight",
-            HP = 200,
+            name = "Knight",
+            Hp = 200,
 
         };
         _db.InsertCharacter(newChar);
@@ -23,12 +23,12 @@ public class SQLTestManager : MonoBehaviour
         List<Character> characters = _db.GetAllCharacters();
         foreach (var c in characters)
         {
-            Debug.Log($"[{c.CharacterId}] {c.Name} / HP: {c.HP} / ");
+//            Debug.Log($"[{c.CharacterId}] {c.Name} / HP: {c.HP} / ");
         }
 
         // 특정 캐릭터 수정
         var first = characters[0];
-        first.HP += 50;
+        first.Hp += 50;
         _db.UpdateCharacter(first);
 
         // 삭제 테스트
