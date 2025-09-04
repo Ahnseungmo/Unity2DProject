@@ -57,6 +57,6 @@ public class Projectile : MonoBehaviour
         Vector2 launchDir = dragStartPos - (Vector2)transform.position;
 
         rb.AddForce(launchDir * power, ForceMode2D.Impulse);
-      
+        rb.AddTorque(100);
     }
 }

@@ -531,11 +531,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29a074d529cf945029ef7cf40540c9df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Target: {fileID: 833965924}
+  m_Target: {fileID: 361232750}
   m_PlayOnAwake: 1
   m_LoopMode: 2
   m_Method: 1
-  m_Duration: 0.3141621
+  m_Duration: 4.436998
   m_MaxSpeed: 10
   m_EasingMode: 0
   m_AlignmentMode: 0
@@ -2487,6 +2487,23 @@ Transform:
   - {fileID: 2119367352}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &957172043 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2058503622709054991, guid: 70fc5b64dd6ff7e4abcc5c7b1536aed4, type: 3}
+  m_PrefabInstance: {fileID: 1845185099}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &957172044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957172043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f02d3d21418a7a40b3fe8d43bbe8b8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &964301937
 GameObject:
   m_ObjectHideFlags: 0
@@ -7100,7 +7117,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -5.46, y: -5.01, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: -2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 477553154}
@@ -7551,7 +7568,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3878658923820406682, guid: 838958e537fa1854aad34b9d90392014, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.3
+      value: -0.329
       objectReference: {fileID: 0}
     - target: {fileID: 3878658923820406682, guid: 838958e537fa1854aad34b9d90392014, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7941,6 +7958,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 8589735620108911795, guid: 838958e537fa1854aad34b9d90392014, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8614123523368269617, guid: 838958e537fa1854aad34b9d90392014, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -8130,23 +8151,23 @@ MonoBehaviour:
   - m_EditModeType: 1
     m_Knots:
     - Position:
-        x: 0
-        y: 0
+        x: -0.069999695
+        y: -0.28999996
         z: 0
       TangentIn:
         x: -0
         y: -0
-        z: -0.22928216
+        z: -0.25911334
       TangentOut:
         x: 0
         y: 0
-        z: 0.22928216
+        z: 0.25911334
       Rotation:
         value:
-          x: -0.70167255
-          y: 0.087496474
-          z: -0.087496474
-          w: 0.70167255
+          x: 0.7017292
+          y: -0.087041296
+          z: 0.08704152
+          w: -0.7017292
     - Position:
         x: 0.56306076
         y: 2.2226095
@@ -8154,17 +8175,17 @@ MonoBehaviour:
       TangentIn:
         x: -0
         y: -0
-        z: -0.6739598
+        z: -0.7425067
       TangentOut:
         x: 0
         y: 0
-        z: 1.0152893
+        z: 1.0521953
       Rotation:
         value:
-          x: 0.6213385
-          y: -0.33754775
-          z: 0.33754784
-          w: -0.62133855
+          x: -0.6214479
+          y: 0.3373463
+          z: -0.3373463
+          w: 0.6214479
     - Position:
         x: 5.6898813
         y: 1.3335657
@@ -8208,20 +8229,20 @@ MonoBehaviour:
       TangentIn:
         x: -0
         y: -0
-        z: -1.4577861
+        z: -1.47896
       TangentOut:
         x: 0
         y: 0
-        z: 1.0283667
+        z: 1.0206609
       Rotation:
         value:
-          x: 0.5391506
-          y: 0.45751137
-          z: -0.45751193
-          w: -0.53915006
+          x: -0.52920353
+          y: -0.46898144
+          z: 0.4689814
+          w: 0.52920353
     - Position:
-        x: 0
-        y: 0
+        x: -0.069999695
+        y: -0.28999996
         z: 0
       TangentIn:
         x: 0
@@ -8244,17 +8265,17 @@ MonoBehaviour:
       TangentIn:
         x: -0
         y: -0
-        z: -0.45010418
+        z: -0.45077822
       TangentOut:
         x: 0
         y: 0
-        z: 0.53692895
+        z: 0.51508987
       Rotation:
         value:
-          x: 0.37966818
-          y: -0.5965334
-          z: 0.5965334
-          w: -0.3796681
+          x: -0.38955122
+          y: 0.59012693
+          z: -0.59012675
+          w: 0.38955164
     - Position:
         x: 2.3100014
         y: -2.1599998
@@ -8875,6 +8896,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 964301938}
     m_Modifications:
+    - target: {fileID: -102686380752043629, guid: 70fc5b64dd6ff7e4abcc5c7b1536aed4, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 8c15d09b25489a345ae9127968128877, type: 2}
+    - target: {fileID: -102686380752043629, guid: 70fc5b64dd6ff7e4abcc5c7b1536aed4, type: 3}
+      propertyPath: m_AngularDamping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -102686380752043629, guid: 70fc5b64dd6ff7e4abcc5c7b1536aed4, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2058503622709054991, guid: 70fc5b64dd6ff7e4abcc5c7b1536aed4, type: 3}
       propertyPath: m_Name
       value: DarkSword
@@ -8922,7 +8955,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2058503622709054991, guid: 70fc5b64dd6ff7e4abcc5c7b1536aed4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 957172044}
   m_SourcePrefab: {fileID: 100100000, guid: 70fc5b64dd6ff7e4abcc5c7b1536aed4, type: 3}
 --- !u!1001 &1878053595
 PrefabInstance:
