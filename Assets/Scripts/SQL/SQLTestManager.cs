@@ -11,7 +11,7 @@ public class SQLTestManager : MonoBehaviour
         _db.Init("data.db");
 
         // 캐릭터 추가
-        var newChar = new Character
+        var newChar = new DBCharacter
         {
             name = "Knight",
             Hp = 200,
@@ -20,7 +20,7 @@ public class SQLTestManager : MonoBehaviour
         _db.InsertCharacter(newChar);
 
         // 전체 캐릭터 출력
-        List<Character> characters = _db.GetAllCharacters();
+        List<DBCharacter> characters = _db.GetAllCharacters();
         foreach (var c in characters)
         {
 //            Debug.Log($"[{c.CharacterId}] {c.Name} / HP: {c.HP} / ");

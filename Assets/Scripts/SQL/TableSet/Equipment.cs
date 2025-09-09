@@ -1,23 +1,23 @@
 using Unity.VisualScripting.Dependencies.Sqlite;
-public enum EquipmentTypes
+public enum DBEquipmentTypes
 {
     Helmet = 0,
     Armor = 1,
     Weapon = 2,
     SubWeapon = 3
 }
-public enum AttackTypes
+public enum DBAttackTypes
 {
     Mele1H = 0,
     Mele2H = 1,
     MeleDual = 2
 }
 
-public class Equipment
+public class DBEquipment
 {
     public int Characterid {set;get;}
-    public EquipmentTypes EquipmentType { set;get;}  
-    public AttackTypes AttackType { set;get;}
+    public DBEquipmentTypes EquipmentType { set;get;}  
+    public DBAttackTypes AttackType { set;get;}
 
 
 }

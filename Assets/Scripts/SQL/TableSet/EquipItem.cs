@@ -1,6 +1,6 @@
 using Unity.VisualScripting.Dependencies.Sqlite;
 
-public class EquipItem
+public class DBEquipItem
 {
     [PrimaryKey, AutoIncrement]
     public int Id { get; set; }

@@ -20,31 +20,31 @@ public class SQLiteManager
         _connection = new SQLiteConnection(dbPath);
 
         // 테이블 생성 (존재하지 않으면 자동 생성)
-        _connection.CreateTable<Character>();
+        _connection.CreateTable<DBCharacter>();
     }
 
-    public void InsertCharacter(Character character)
+    public void InsertCharacter(DBCharacter character)
     {
         _connection.Insert(character);
     }
 
-    public List<Character> GetAllCharacters()
+    public List<DBCharacter> GetAllCharacters()
     {
-        return _connection.Table<Character>().ToList<Character>();
+        return _connection.Table<DBCharacter>().ToList<DBCharacter>();
     }
 
-    public Character GetCharacterById(int id)
+    public DBCharacter GetCharacterById(int id)
     {
-        return _connection.Find<Character>(id);
+        return _connection.Find<DBCharacter>(id);
     }
 
-    public void UpdateCharacter(Character character)
+    public void UpdateCharacter(DBCharacter character)
     {
         _connection.Update(character);
     }
 
     public void DeleteCharacter(int id)
     {
-        _connection.Delete<Character>(id);
+        _connection.Delete<DBCharacter>(id);
     }
 }

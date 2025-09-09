@@ -1,7 +1,7 @@
 
 using Unity.VisualScripting.Dependencies.Sqlite;
 
-public class Character
+public class DBCharacter
 {
     [PrimaryKey, AutoIncrement]
     public int Id { get; set; }

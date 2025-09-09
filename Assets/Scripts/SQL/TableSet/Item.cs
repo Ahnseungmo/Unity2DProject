@@ -3,7 +3,7 @@ using Unity.VisualScripting.Dependencies.Sqlite;
 
 
 
-public class Item
+public class DBItem
 {
     [PrimaryKey, AutoIncrement]
     public int ItemID {  get; set; }
