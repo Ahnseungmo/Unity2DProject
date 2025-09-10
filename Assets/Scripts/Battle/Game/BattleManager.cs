@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class BattleManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
+    public static BattleManager Instance { get; private set; }
 
     public Player player;
     public List<Monster> monsters = new List<Monster>();

@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.bodyType = RigidbodyType2D.Kinematic;
     }
 
     public void Init(WeaponInstance weapon)
@@ -25,7 +26,7 @@ public class Projectile : MonoBehaviour
         Target target = collision.gameObject.GetComponent<Target>();
         if (target != null)
         {
-            GameManager.Instance.DamageMonster(target.monsterId, weapon.GetDamage());
+            BattleManager.Instance.DamageMonster(target.monsterId, weapon.GetDamage());
         }
         Destroy(gameObject);
     }
