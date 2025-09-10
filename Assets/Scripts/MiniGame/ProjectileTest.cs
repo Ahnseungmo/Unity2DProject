@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class ProjectileTest : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Vector2 dragStartPos;
