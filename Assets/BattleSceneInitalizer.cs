@@ -8,6 +8,6 @@ public class BattleSceneInitalizer : MonoBehaviour
     {
         GameObject playerObj = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
         Player player = playerObj.GetComponent<Player>();
-        BattleManager.Instance.player = player;
+//        BattleManager.Instance.player = player;
     }
 }
