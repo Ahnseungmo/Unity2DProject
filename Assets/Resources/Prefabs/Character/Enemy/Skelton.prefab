@@ -147,7 +147,7 @@ MonoBehaviour:
   maxHp: 0
   currentHp: 0
   attack: 0
-  animator: {fileID: 0}
+  animator: {fileID: 2495558557133077662}
   linkedMonster: {fileID: 0}
 --- !u!1001 &6957118354889806500
 PrefabInstance:
@@ -550,6 +550,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64359be8b124840d0bb4846426882691, type: 3}
+--- !u!95 &2495558557133077662 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4768932681013849658, guid: 64359be8b124840d0bb4846426882691, type: 3}
+  m_PrefabInstance: {fileID: 6957118354889806500}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3032233084194691655 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5375047960093657315, guid: 64359be8b124840d0bb4846426882691, type: 3}

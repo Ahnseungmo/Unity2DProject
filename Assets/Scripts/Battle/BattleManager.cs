@@ -106,6 +106,11 @@ public class BattleManager : MonoBehaviour
         if (index >= spawnSlotsB.Count || spawnSlotsB[index] == null) { Debug.LogError($"spawnSlotsB[{index}] missing"); return null; }
 
         GameObject go = Instantiate(monsterPrefabB, spawnSlotsB[index].position, Quaternion.identity, spawnSlotsB[index]);
+//        go.GetComponent<Rigidbody2D>().simulated = false;
+        go.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            
+        ChangeLayersRecursively(go.transform, spawnSlotsB[index].gameObject.layer);
+
         Monster m = go.GetComponent<Monster>();
         if (m == null) Debug.LogError("monsterPrefabB missing Monster script");
         else m.Init(data.monsterId, data.hp, data.attack);
@@ -179,5 +184,28 @@ public class BattleManager : MonoBehaviour
         }
         yield return new WaitForSeconds(0.5f);
         StartPlayerTurn();
+    }
+
+    private void ChangeLayersRecursively(Transform trans, string layerName)
+    {
+        // 현재 오브젝트의 레이어를 변경
+        trans.gameObject.layer = LayerMask.NameToLayer(layerName);
+
+        // 모든 자식 오브젝트에 대해 재귀적으로 함수 호출
+        foreach (Transform child in trans)
+        {
+            ChangeLayersRecursively(child, layerName);
+        }
+    }
+    private void ChangeLayersRecursively(Transform trans, int layer)
+    {
+        // 현재 오브젝트의 레이어를 변경
+        trans.gameObject.layer = layer;
+
+        // 모든 자식 오브젝트에 대해 재귀적으로 함수 호출
+        foreach (Transform child in trans)
+        {
+            ChangeLayersRecursively(child, layer);
+        }
     }
 }

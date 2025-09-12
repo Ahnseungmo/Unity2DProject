@@ -2798,7 +2798,8 @@ MonoBehaviour:
   maxHp: 100
   currentHp: 100
   attack: 50
-  animator: {fileID: 0}
+  animator: {fileID: 1659795747873483907}
+  linkedMonster: {fileID: 0}
 --- !u!1 &5758976631279574379
 GameObject:
   m_ObjectHideFlags: 0

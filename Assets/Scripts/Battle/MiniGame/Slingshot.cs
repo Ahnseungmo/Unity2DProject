@@ -29,8 +29,10 @@ public class Slingshot : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoin
         if (preparedWeapon != null && preparedWeapon.projectilePrefab != null)
         {
             previewProjectile = Instantiate(preparedWeapon.projectilePrefab, throwPoint.position, Quaternion.identity);
+            Destroy(previewProjectile.GetComponent<Projectile>()); 
             var rb = previewProjectile.GetComponent<Rigidbody2D>();
-            if (rb != null) rb.isKinematic = true;
+            previewProjectile.GetComponent<Collider2D>().enabled = false;
+            if (rb != null) rb.bodyType = RigidbodyType2D.Kinematic;
             // LineRenderer
             if (lineRendererPrefab != null)
             {
@@ -43,6 +45,7 @@ public class Slingshot : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoin
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        print("DragDown");
         if (!ready) return;
         isDragging = true;
         dragStartScreen = eventData.position;
@@ -50,6 +53,8 @@ public class Slingshot : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoin
 
     public void OnDrag(PointerEventData eventData)
     {
+        print("OnDown");
+
         if (!isDragging || previewProjectile == null) return;
 
         Vector2 mouseScreen = eventData.position;
@@ -59,6 +64,13 @@ public class Slingshot : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoin
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(dragStartScreen - dragVec);
         worldPos.z = 0;
         previewProjectile.transform.position = worldPos;
+
+        // 각도 계산 및 회전
+        Vector2 direction = worldPos - throwPoint.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        previewProjectile.transform.rotation = Quaternion.Euler(0, 0, angle);
+        
+
 
         if (previewLine != null)
         {
@@ -70,6 +82,8 @@ public class Slingshot : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoin
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        print("DragUp");
+
         if (!isDragging || preparedWeapon == null) return;
         isDragging = false;
         ready = false;

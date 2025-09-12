@@ -31,7 +31,7 @@ public abstract class Character : MonoBehaviour
     {
         if (!IsAlive) return;
         currentHp -= dmg;
-        animator?.SetTrigger("Hit");
+        animator?.SetTrigger("3_Damaged");
         if (currentHp <= 0)
         {
             currentHp = 0;

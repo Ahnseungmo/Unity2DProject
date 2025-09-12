@@ -7,13 +7,14 @@ public class Player : Character
 
     public override void Die()
     {
-        animator?.SetTrigger("Die");
+        animator?.SetTrigger("4_Death");
         Debug.Log("Player died - Game Over (여기서 게임오버 처리)");
     }
 
     // 공격 애니메이션(던지기) 재생
     public void PlayThrowAnimation()
     {
-        animator?.SetTrigger("Throw");
+        animator?.SetTrigger("2_Attack");
+        //        animator?.SetTrigger("Throw");
     }
 }

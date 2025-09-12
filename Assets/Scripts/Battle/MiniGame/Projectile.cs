@@ -9,22 +9,23 @@ public class Projectile : MonoBehaviour
     bool launched = false;
     bool ended = false;
 
-    // ¸ØÃã °¨Áö ÀÓ°èÄ¡
+    // ë©ˆì¶¤ ê°ì§€ ì„ê³„ì¹˜
     public float stopVelocityThreshold = 0.15f;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.bodyType = RigidbodyType2D.Kinematic;
     }
 
     // power: scalar, direction: normalized
     public void Init(WeaponTemplate w, float power, Vector2 direction)
     {
         weapon = w;
-        rb.isKinematic = false;
-        rb.velocity = direction * power;
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        rb.linearVelocity = direction * power;
         launched = true;
-        // ¾ÈÀü »èÁ¦
+        // ì•ˆì „ ì‚­ì œ
         Destroy(gameObject, 6f);
     }
 
@@ -32,7 +33,7 @@ public class Projectile : MonoBehaviour
     {
         if (!launched || ended) return;
 
-        if (rb.velocity.magnitude < stopVelocityThreshold)
+        if (rb.linearVelocity.magnitude < stopVelocityThreshold)
         {
             EndShot();
         }
@@ -47,24 +48,27 @@ public class Projectile : MonoBehaviour
 
     IEnumerator NotifyAndDestroy()
     {
-        // ¸ØÃá ½ÃÁ¡¿¡ BattleManager¿¡°Ô ¾Ë¸²ÇØ¼­ 1ÃÊ ´ë±â ÈÄ ´ÙÀ½¼¦ ÁØºñÇÏ°Ô ÇÔ
+        // ë©ˆì¶˜ ì‹œì ì— BattleManagerì—ê²Œ ì•Œë¦¼í•´ì„œ 1ì´ˆ ëŒ€ê¸° í›„ ë‹¤ìŒìƒ· ì¤€ë¹„í•˜ê²Œ í•¨
         BattleManager.Instance.OnProjectileStopped();
-        // ¾à°£ µô·¹ÀÌ¸¦ µÎ°í ÆÄ±« (¾ø¾îµµ µÊ)
+        // ì•½ê°„ ë”œë ˆì´ë¥¼ ë‘ê³  íŒŒê´´ (ì—†ì–´ë„ ë¨)
         yield return new WaitForSeconds(0.1f);
+        print("ë¬´ê¸° íŒŒê´´");
         Destroy(gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (ended) return; // ÀÌ¹Ì Ã³¸®µÈ °æ¿ì ¹«½Ã
+        if (ended) return; // ì´ë¯¸ ì²˜ë¦¬ëœ ê²½ìš° ë¬´ì‹œ
 
-        var monster = collision.collider.GetComponent<Monster>();
+        var monster = collision.gameObject.GetComponent<Monster>();
+        print(monster);
         if (monster != null && weapon != null)
         {
             monster.TakeDamage(weapon.damage);
+            print(monster.currentHp);
         }
 
-        // Ãæµ¹µµ ¸ØÃá °ÍÀ¸·Î °£ÁÖ
+        // ì¶©ëŒë„ ë©ˆì¶˜ ê²ƒìœ¼ë¡œ ê°„ì£¼
         EndShot();
     }
 }

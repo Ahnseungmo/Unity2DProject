@@ -12,10 +12,15 @@ public class Monster : Character
 
     public override void Die()
     {
-        animator?.SetTrigger("Die");
+        animator?.SetTrigger("4_Death");
         // 단순히 비활성화 처리 (원하면 풀 페이드나 슬롯 제거 처리)
-        gameObject.SetActive(false);
+        //        animator?.GetBool();
+
+        StartCoroutine(Death());
+
     }
+
+
 
     // TakeDamage는 Character.TakeDamage 로직을 확장해서
     // A/B 양쪽을 동기화하고 피격 이펙트를 처리
@@ -24,7 +29,7 @@ public class Monster : Character
         if (!IsAlive) return;
 
         currentHp -= dmg;
-        animator?.SetTrigger("Hit");
+        animator?.SetTrigger("3_Damaged");
 
         // 시각적 피격 효과
         StartCoroutine(HitEffect());
@@ -46,7 +51,7 @@ public class Monster : Character
     public void SyncFromLinked(int hp)
     {
         currentHp = hp;
-        animator?.SetTrigger("Hit");
+        animator?.SetTrigger("3_Damaged");
         if (currentHp <= 0) Die();
     }
 
@@ -59,12 +64,44 @@ public class Monster : Character
             sr.color = Color.white;
         }
     }
+    IEnumerator Death()
+    {
+        yield return null;
+
+        // 3. 현재 애니메이션 상태 정보 가져오기
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+        // 4. 현재 재생 중인 애니메이션의 길이 가져오기
+        float animationLength = stateInfo.length;
+
+        // 5. 해당 시간만큼 대기
+        yield return new WaitForSeconds(animationLength);
+        gameObject.SetActive(false);
+
+    }
 
     // 몬스터가 플레이어 공격 시 호출
     public void DoAttack(Player player)
     {
         if (!IsAlive) return;
-        animator?.SetTrigger("Attack");
+        animator?.SetTrigger("2_Attack");
+        StartCoroutine(Attack(player));
+
+    }
+    IEnumerator Attack(Player player)
+    {
+        yield return null;
+
+        // 3. 현재 애니메이션 상태 정보 가져오기
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+        // 4. 현재 재생 중인 애니메이션의 길이 가져오기
+        float animationLength = stateInfo.length;
+
+        // 5. 해당 시간만큼 대기
+        yield return new WaitForSeconds(animationLength);
+
         player.TakeDamage(attack);
     }
+
 }
