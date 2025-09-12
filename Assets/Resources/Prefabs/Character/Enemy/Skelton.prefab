@@ -79,8 +79,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8741476827612526464}
   - component: {fileID: 1954371047827821404}
-  - component: {fileID: 534306253825540334}
-  - component: {fileID: 2154034369478792459}
+  - component: {fileID: 6806421124673648639}
   m_Layer: 7
   m_Name: Skelton
   m_TagString: Untagged
@@ -132,7 +131,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &534306253825540334
+--- !u!114 &6806421124673648639
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,24 +140,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7225925362721821360}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7078de343e7956f40929252936a3e738, type: 3}
+  m_Script: {fileID: 11500000, guid: e386d14b254906346b6a901a76a57a71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Skelton
-  hp: 50
-  attackDamage: 10
---- !u!114 &2154034369478792459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7225925362721821360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80bae57a36a5aaf45a587600186b5189, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  characterId: 
+  maxHp: 0
+  currentHp: 0
+  attack: 0
+  animator: {fileID: 0}
   linkedMonster: {fileID: 0}
 --- !u!1001 &6957118354889806500
 PrefabInstance:

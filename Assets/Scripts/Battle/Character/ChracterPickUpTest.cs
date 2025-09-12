@@ -2,7 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Chracter : MonoBehaviour, IPointerClickHandler
+public class ChracterPickUpTest : MonoBehaviour, IPointerClickHandler
 {
     public int maxhp = 100;
     public int hp = 100;
@@ -48,11 +48,7 @@ public class Chracter : MonoBehaviour, IPointerClickHandler
 
     // Update is called once per frame
     void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-
-        }
+    { 
     }
 
     Transform FindChildByName(Transform parent, string childName)
