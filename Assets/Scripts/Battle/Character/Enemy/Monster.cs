@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Splines;
 
 public class Monster : Character
 {
@@ -16,6 +17,10 @@ public class Monster : Character
         // 단순히 비활성화 처리 (원하면 풀 페이드나 슬롯 제거 처리)
         //        animator?.GetBool();
 
+        SplineAnimate spani = GetComponent<SplineAnimate>();
+        if (spani != null) {
+            spani.enabled = false;
+        }
         StartCoroutine(Death());
 
     }

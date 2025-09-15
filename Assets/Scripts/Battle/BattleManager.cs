@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Splines;
 
 public class BattleManager : MonoBehaviour
 {
@@ -10,6 +13,7 @@ public class BattleManager : MonoBehaviour
     public Inventory inventory;
     public Slingshot slingshot;         // Scene에서 연결
     public Transform throwPoint;        // B 화면 던지는 기준(슬링샷에도 연결 가능)
+    public MonsterMovement monsterMovement;
 
     [Header("Prefabs & Slots")]
     public GameObject playerPrefab;
@@ -23,7 +27,6 @@ public class BattleManager : MonoBehaviour
     public Player player;
     public List<Monster> monstersA = new List<Monster>();
     public List<Monster> monstersB = new List<Monster>();
-
     // 현재 턴의 준비된 무기 (ReadyNextShot에서 세팅)
     private WeaponTemplate currentWeapon;
 
@@ -75,7 +78,7 @@ public class BattleManager : MonoBehaviour
         {
             var mData = data.monsters[i];
             Monster mA = SpawnInA(mData, i);
-            Monster mB = SpawnInB(mData, i);
+            Monster mB = SpawnInB(mData, i, data.monsters.Count);
 
             if (mA != null && mB != null)
             {
@@ -86,6 +89,12 @@ public class BattleManager : MonoBehaviour
                 monstersB.Add(mB);
             }
         }
+    }
+
+    void SpawnPath()
+    {
+
+
     }
 
     Monster SpawnInA(MonsterData data, int index)
@@ -100,20 +109,40 @@ public class BattleManager : MonoBehaviour
         return m;
     }
 
-    Monster SpawnInB(MonsterData data, int index)
+    Monster SpawnInB(MonsterData data, int index, int msize)
     {
         if (monsterPrefabB == null) { Debug.LogError("monsterPrefabB missing"); return null; }
         if (index >= spawnSlotsB.Count || spawnSlotsB[index] == null) { Debug.LogError($"spawnSlotsB[{index}] missing"); return null; }
 
         GameObject go = Instantiate(monsterPrefabB, spawnSlotsB[index].position, Quaternion.identity, spawnSlotsB[index]);
-//        go.GetComponent<Rigidbody2D>().simulated = false;
-        go.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            
+        //        go.GetComponent<Rigidbody2D>().simulated = false;
+        //        go.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        go.GetComponent<Rigidbody2D>().gravityScale = 0;
         ChangeLayersRecursively(go.transform, spawnSlotsB[index].gameObject.layer);
 
         Monster m = go.GetComponent<Monster>();
         if (m == null) Debug.LogError("monsterPrefabB missing Monster script");
         else m.Init(data.monsterId, data.hp, data.attack);
+
+        
+
+        List<MovePathTemplate> paths = monsterMovement.movePathTemplates;
+        
+        GameObject pathObject = Instantiate(paths[UnityEngine.Random.Range(0, paths.Count)].pathPrefab, go.transform.parent);
+        SplineContainer sc = pathObject.GetComponent<SplineContainer>();
+        
+        //SplineContainer sc = paths[UnityEngine.Random.Range(0, paths.Count)].pathPrefab.GetComponent<SplineContainer>();
+
+
+        //        SplineContainer sc = paths[UnityEngine.Random.Range(0,paths.Count)].pathPrefab.GetComponent<SplineContainer>();
+        SplineAnimate ani = go.AddComponent<SplineAnimate>();
+        ani.Container = sc;
+        ani.Alignment = SplineAnimate.AlignmentMode.None;
+        ani.AnimationMethod = SplineAnimate.Method.Speed;
+        ani.MaxSpeed = 5;
+        ani.StartOffset = (float)(index+1) / (float)msize;
+        ani.Play();
+//        ani.start
         return m;
     }
 
