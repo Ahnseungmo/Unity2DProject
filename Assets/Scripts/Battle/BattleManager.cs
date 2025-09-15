@@ -156,6 +156,7 @@ public class BattleManager : MonoBehaviour
     // 준비: 인벤토리에서 다음 무기 꺼내서 슬링샷에 전달 (발사는 슬링샷에서)
     public void ReadyNextShot()
     {
+        if (monstersB.Count <= 0) EndBattle();
         if (waitingForNextShot) return; // 이미 대기중이면 중복 방지
 
         if (!inventory.HasWeapons())
@@ -236,5 +237,10 @@ public class BattleManager : MonoBehaviour
         {
             ChangeLayersRecursively(child, layer);
         }
+    }
+
+    public void EndBattle()
+    {
+        print("clear");
     }
 }

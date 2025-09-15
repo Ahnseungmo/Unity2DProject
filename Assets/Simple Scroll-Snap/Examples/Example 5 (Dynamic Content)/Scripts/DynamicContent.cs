@@ -25,6 +25,11 @@ namespace DanielLochner.Assets.SimpleScrollSnap
             toggleWidth = (togglePrefab.transform as RectTransform).sizeDelta.x * (Screen.width / 2048f); ;
         }
 
+        private void Update()
+        {
+            print(scrollSnap.SelectedPanel);
+        }
+
         public void Add(int index)
         {
             // Pagination
