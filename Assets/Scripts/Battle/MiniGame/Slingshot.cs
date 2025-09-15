@@ -53,24 +53,21 @@ public class Slingshot : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoin
 
     public void OnDrag(PointerEventData eventData)
     {
-        print("OnDown");
-
         if (!isDragging || previewProjectile == null) return;
 
         Vector2 mouseScreen = eventData.position;
         Vector2 dragVec = (dragStartScreen - mouseScreen);
-        if (dragVec.magnitude > maxDragDistance) dragVec = dragVec.normalized * maxDragDistance;
+        if (dragVec.magnitude > maxDragDistance)
+            dragVec = dragVec.normalized * maxDragDistance;
 
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(dragStartScreen - dragVec);
         worldPos.z = 0;
         previewProjectile.transform.position = worldPos;
 
-        // 각도 계산 및 회전
-        Vector2 direction = worldPos - throwPoint.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        previewProjectile.transform.rotation = Quaternion.Euler(0, 0, angle);
-        
+        Vector2 dir = (throwPoint.position - worldPos).normalized;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
+        previewProjectile.transform.rotation = Quaternion.Euler(0, 0, angle + 90f);
 
         if (previewLine != null)
         {
