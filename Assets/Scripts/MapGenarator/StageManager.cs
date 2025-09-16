@@ -14,22 +14,28 @@ public class StageManager : MonoBehaviour
     public Grid Map;
     public GameObject nodePrefab;
     public GameObject linePrefab;
+    public Sprite Home;
+    public Sprite Battle;
+    public Sprite Boss;
 
     [Header("Config")]
     public int TotalFloors;
     public int FloorWeight;
     public int RootSize;
 
-    MapGenerator mapGenerator = new MapGenerator();
+
+    //  MapGenerator mapGenerator = new MapGenerator();
 
     private Dictionary<MapNodeData, MapNodeComponent> nodeComponentMap = new Dictionary<MapNodeData, MapNodeComponent>();
 
     void Start()
     {
-        mapGenerator.Generate(TotalFloors, FloorWeight, RootSize);
+
+        MapGenerator.Get.Generate(TotalFloors, FloorWeight, RootSize);
+
 
         // 1) 데이터 -> GameObject + 컴포넌트 생성 및 위치 지정
-        foreach (var nodeData in mapGenerator.AllNodes)
+        foreach (var nodeData in MapGenerator.Get.AllNodes)
         {
             GameObject obj = Instantiate(nodePrefab, Map.transform);
             Vector3 pos = Map.GetCellCenterLocal(new Vector3Int(nodeData.Pos.x, nodeData.Pos.y, 0));
@@ -40,10 +46,28 @@ public class StageManager : MonoBehaviour
 
             comp.Data = nodeData;
             nodeComponentMap[nodeData] = comp;
+
+            Sprite sp;
+            switch (comp.Data.mapType)
+            {
+                case MapType.Home:
+                    sp = Home;
+                    break;
+                case MapType.Battle:
+                    sp = Battle;
+                    break;
+                case MapType.Boss:
+                    sp = Boss;
+                    break;
+                default:
+                    sp = null;
+                    break;
+            }
+            obj.GetComponent<SpriteRenderer>().sprite = sp;
         }
 
         // 2) 부모-자식 컴포넌트 연결
-        foreach (var nodeData in mapGenerator.AllNodes)
+        foreach (var nodeData in MapGenerator.Get.AllNodes)
         {
             MapNodeComponent comp = nodeComponentMap[nodeData];
             foreach (var childData in nodeData.Children)

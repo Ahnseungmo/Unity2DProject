@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using DanielLochner.Assets.SimpleScrollSnap;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
@@ -7,17 +9,25 @@ public class Inventory : MonoBehaviour
     public List<WeaponTemplate> weaponTemplates = new List<WeaponTemplate>();
 
     private Queue<WeaponTemplate> turnWeapons = new Queue<WeaponTemplate>();
+    public InventoryContent InventoryUI;
 
     public void RefillWeapons()
     {
         turnWeapons.Clear();
         foreach (var w in weaponTemplates)
+        {
+            var sr = w.projectilePrefab.GetComponent<SpriteRenderer>();
+            InventoryUI.AddToBack(sr.sprite);
             turnWeapons.Enqueue(w);
+
+        }
     }
 
     public WeaponTemplate GetNextWeapon()
     {
+
         if (turnWeapons.Count == 0) return null;
+        InventoryUI.RemoveFromFront();
         return turnWeapons.Dequeue();
     }
 

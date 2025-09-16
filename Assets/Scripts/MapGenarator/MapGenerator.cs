@@ -2,14 +2,23 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+public enum MapType
+{
+    Home,
+    Battle,
+    Boss
+}
 public class MapNodeData
 {
     public Vector2Int Pos;
     public List<MapNodeData> Children = new List<MapNodeData>();
     public List<MapNodeData> Parents = new List<MapNodeData>();
+
+    public MapType mapType;
+    public int index;
 }
 
-public class MapGenerator
+public class MapGenerator : Singleton<MapGenerator>
 {
     public List<MapNodeData> AllNodes = new List<MapNodeData>();
 
@@ -72,7 +81,8 @@ public class MapGenerator
                 {
                     MapNodeData node = new MapNodeData
                     {
-                        Pos = pos
+                        Pos = pos,
+                        mapType = MapType.Battle
                     };
                     nodeDict.Add(key, node);
                     AllNodes.Add(node);
@@ -80,6 +90,24 @@ public class MapGenerator
             }
         }
 
+        //시작 node 생성
+        {
+            MapNodeData node = new MapNodeData { Pos = new Vector2Int(floorWeight / 2, -1) };
+            node.mapType = MapType.Home;
+            nodeDict.Add((0, -1), node);
+            AllNodes.Add(node);
+
+        }
+
+
+        //보스 node 생성 
+        {
+            MapNodeData node = new MapNodeData { Pos = new Vector2Int(floorWeight / 2, totalFloors) };
+            node.mapType = MapType.Boss;
+            nodeDict.Add((0, totalFloors), node);
+            AllNodes.Add(node);
+
+        }
         // 부모-자식 관계 설정 (y+1 층과 y 층 연결)
         foreach (var root in roots)
         {
@@ -87,6 +115,25 @@ public class MapGenerator
             {
                 var parentKey = (root[i - 1].x, root[i - 1].y);
                 var childKey = (root[i].x, root[i].y);
+
+                MapNodeData parentNode = nodeDict[parentKey];
+                MapNodeData childNode = nodeDict[childKey];
+
+                if (!parentNode.Children.Contains(childNode))
+                    parentNode.Children.Add(childNode);
+
+                if (!childNode.Parents.Contains(parentNode))
+                    childNode.Parents.Add(parentNode);
+            }
+        }
+
+        foreach (var root in roots)
+        {
+            for (int i = 0; i < 2; i++)
+            {
+
+                var parentKey = (i==0)? (0,-1): (root[totalFloors - 1].x, root[totalFloors - 1].y);
+                var childKey = (i==0)? (root[0].x, root[0].y): (0, totalFloors);
 
                 MapNodeData parentNode = nodeDict[parentKey];
                 MapNodeData childNode = nodeDict[childKey];
