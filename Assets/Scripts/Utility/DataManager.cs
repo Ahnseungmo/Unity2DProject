@@ -33,5 +33,7 @@ public class WeaponData
 
 public class DataManager : Singleton<DataManager>
 {
-    
+    public StageData stageData;
+    public Player player;
+
 }

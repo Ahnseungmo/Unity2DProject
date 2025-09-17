@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Splines;
 
 public class BattleManager : MonoBehaviour
@@ -10,7 +11,7 @@ public class BattleManager : MonoBehaviour
     public static BattleManager Instance;
 
     [Header("References")]
-    public Inventory inventory;
+    public Inventory inventory = Inventory.Instance;
     public Slingshot slingshot;         // Scene에서 연결
     public Transform throwPoint;        // B 화면 던지는 기준(슬링샷에도 연결 가능)
     public MonsterMovement monsterMovement;
@@ -22,8 +23,10 @@ public class BattleManager : MonoBehaviour
     public GameObject monsterPrefabB;
     public List<Transform> spawnSlotsA; // 0..3
     public List<Transform> spawnSlotsB; // 0..3
+    public GameObject HpBarPrefab;
 
     [Header("Runtime")]
+    public Player playerData;
     public Player player;
     public List<Monster> monstersA = new List<Monster>();
     public List<Monster> monstersB = new List<Monster>();
@@ -51,6 +54,7 @@ public class BattleManager : MonoBehaviour
 
     void SpawnPlayer()
     {
+        
         if (player != null)
         {
             player.transform.SetParent(playerSlot, false);
@@ -63,11 +67,16 @@ public class BattleManager : MonoBehaviour
             Debug.LogError("playerPrefab or playerSlot not assigned");
             return;
         }
-
+        
         GameObject pgo = Instantiate(playerPrefab, playerSlot.position, Quaternion.identity, playerSlot);
         player = pgo.GetComponent<Player>();
         if (player == null) Debug.LogError("playerPrefab has no Player component");
-        player.Init("Player", 100, 5);
+       player.Init("Player", 100, 5);
+
+        GameObject worldCavas = GameObject.FindWithTag("WorldCanvas");
+        HpBar hpbar = Instantiate(HpBarPrefab, worldCavas.transform).GetComponent<HpBar>();
+        hpbar.character = player;
+
     }
 
     void SpawnMonsters(StageData data)
@@ -106,6 +115,10 @@ public class BattleManager : MonoBehaviour
         Monster m = go.GetComponent<Monster>();
         if (m == null) Debug.LogError("monsterPrefabA missing Monster script");
         else m.Init(data.monsterId, data.hp, data.attack);
+
+        GameObject worldCavas = GameObject.FindWithTag("WorldCanvas");
+        HpBar hpbar = Instantiate(HpBarPrefab, worldCavas.transform).GetComponent<HpBar>();
+        hpbar.character = m;
         return m;
     }
 
@@ -156,7 +169,13 @@ public class BattleManager : MonoBehaviour
     // 준비: 인벤토리에서 다음 무기 꺼내서 슬링샷에 전달 (발사는 슬링샷에서)
     public void ReadyNextShot()
     {
-        if (monstersB.Count <= 0) EndBattle();
+        int c = 0;
+        foreach (var m in monstersB) if (m.gameObject.activeSelf) c++;
+        if (c <= 0)
+        {
+            EndBattle();
+            return;
+        }
         if (waitingForNextShot) return; // 이미 대기중이면 중복 방지
 
         if (!inventory.HasWeapons())
@@ -242,5 +261,7 @@ public class BattleManager : MonoBehaviour
     public void EndBattle()
     {
         print("clear");
+
+        SceneManager.LoadScene("MapScene");
     }
 }

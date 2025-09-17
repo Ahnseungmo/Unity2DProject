@@ -3,7 +3,7 @@ using DanielLochner.Assets.SimpleScrollSnap;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory : MonoBehaviourSingleton<Inventory>
 {
     [Tooltip("매 턴 고정으로 사용할 무기 템플릿들")]
     public List<WeaponTemplate> weaponTemplates = new List<WeaponTemplate>();
