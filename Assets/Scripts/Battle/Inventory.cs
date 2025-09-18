@@ -10,7 +10,10 @@ public class Inventory : MonoBehaviourSingleton<Inventory>
 
     private Queue<WeaponTemplate> turnWeapons = new Queue<WeaponTemplate>();
     public InventoryContent InventoryUI;
-
+    public void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
     public void RefillWeapons()
     {
         turnWeapons.Clear();

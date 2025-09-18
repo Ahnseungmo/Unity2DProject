@@ -10932,6 +10932,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6877de5d9c5a94f4b83825800eb96681, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponTemplates:
+  - {fileID: 11400000, guid: 8decf9adcd13c8043aa7410445d9b8ca, type: 2}
+  - {fileID: 11400000, guid: e16f4bb04e5211d4b9e5c7d9a650b0d5, type: 2}
+  - {fileID: 11400000, guid: e16f4bb04e5211d4b9e5c7d9a650b0d5, type: 2}
 --- !u!4 &1380194565
 Transform:
   m_ObjectHideFlags: 0

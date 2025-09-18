@@ -34,7 +34,6 @@ public class NodePrefab : MonoBehaviour,IPointerClickHandler
             case MapType.Battle:
 
                 StageData stage = new StageData();
-                Player player = new Player();
                 //        player.Init("Player", 100, 5);
                 // 최대 4마리 몬스터 추가
                 stage.monsters.Add(new MonsterData("Goblin", 50, 10));

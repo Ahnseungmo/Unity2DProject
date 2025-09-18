@@ -22,7 +22,8 @@ namespace DanielLochner.Assets.SimpleScrollSnap
         #region Methods
         private void Awake()
         {
-//            toggleWidth = (togglePrefab.transform as RectTransform).sizeDelta.x * (Screen.width / 2048f); ;
+            //            toggleWidth = (togglePrefab.transform as RectTransform).sizeDelta.x * (Screen.width / 2048f); ;
+            Inventory.Instance.InventoryUI = this;
         }
 
         private void Update()

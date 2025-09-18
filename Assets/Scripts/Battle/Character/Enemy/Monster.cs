@@ -42,7 +42,7 @@ public class Monster : Character
         // A/B 동기화: linkedMonster가 있으면 체력값과 피격 애니메이션을 동기화
         if (linkedMonster != null && linkedMonster != this)
         {
-            linkedMonster.SyncFromLinked(currentHp);
+            linkedMonster.SyncFromLinked(currentHp, dmg);
         }
 
         if (currentHp <= 0)
@@ -53,10 +53,14 @@ public class Monster : Character
     }
 
     // linked 쪽에서 현재 체력으로 동기화할 때 사용
-    public void SyncFromLinked(int hp)
+    public void SyncFromLinked(int hp,int dmg = 0)
     {
         currentHp = hp;
         animator?.SetTrigger("3_Damaged");
+        print(dmg);
+        DamageFont damage = PoolingManager.Get.SpawnPool("Damage",gameObject.transform).GetComponent<DamageFont>();
+        damage.PrintDamage(dmg);
+
         if (currentHp <= 0) Die();
     }
 

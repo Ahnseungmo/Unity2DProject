@@ -23,8 +23,25 @@ public abstract class Character : MonoBehaviour
         maxHp = hp;
         currentHp = hp;
         attack = atk;
-        if (animator == null)
-            animator = GetComponent<Animator>();
+        try
+        {
+            if (animator == null)
+                animator = GetComponent<Animator>();
+        }
+        catch { }
+    }
+    public virtual void Init(Character character)
+    { 
+        characterId  = character.characterId;
+        currentHp = character.currentHp;
+        attack = character.attack;
+        maxHp = character.maxHp;
+        try
+        {
+            if (animator == null)
+                animator = GetComponent<Animator>();
+        }
+        catch { }
     }
 
     public virtual void TakeDamage(int dmg)

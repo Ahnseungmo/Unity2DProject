@@ -11,10 +11,10 @@ public class BattleManager : MonoBehaviour
     public static BattleManager Instance;
 
     [Header("References")]
-    public Inventory inventory = Inventory.Instance;
     public Slingshot slingshot;         // Scene에서 연결
     public Transform throwPoint;        // B 화면 던지는 기준(슬링샷에도 연결 가능)
     public MonsterMovement monsterMovement;
+    public Canvas WorldCanvas;
 
     [Header("Prefabs & Slots")]
     public GameObject playerPrefab;
@@ -24,8 +24,10 @@ public class BattleManager : MonoBehaviour
     public List<Transform> spawnSlotsA; // 0..3
     public List<Transform> spawnSlotsB; // 0..3
     public GameObject HpBarPrefab;
+    public GameObject DamageFontPrefab;
 
-    [Header("Runtime")]
+
+[Header("Runtime")]
     public Player playerData;
     public Player player;
     public List<Monster> monstersA = new List<Monster>();
@@ -49,6 +51,8 @@ public class BattleManager : MonoBehaviour
         SpawnPlayer();
         SpawnMonsters(stageData);
 
+        PoolingManager.Get.CreatePool("Damage", DamageFontPrefab, 10,"WorldCanvas");
+
         StartPlayerTurn();
     }
 
@@ -71,8 +75,10 @@ public class BattleManager : MonoBehaviour
         GameObject pgo = Instantiate(playerPrefab, playerSlot.position, Quaternion.identity, playerSlot);
         player = pgo.GetComponent<Player>();
         if (player == null) Debug.LogError("playerPrefab has no Player component");
-       player.Init("Player", 100, 5);
 
+        player.Init(DataManager.Get.player);
+        
+        print(player.currentHp);
         GameObject worldCavas = GameObject.FindWithTag("WorldCanvas");
         HpBar hpbar = Instantiate(HpBarPrefab, worldCavas.transform).GetComponent<HpBar>();
         hpbar.character = player;
@@ -162,7 +168,7 @@ public class BattleManager : MonoBehaviour
     // 플레이어 턴 시작: 인벤토리 리필 -> 첫 무기 준비
     public void StartPlayerTurn()
     {
-        inventory.RefillWeapons();
+        Inventory.Instance.RefillWeapons();
         ReadyNextShot();
     }
 
@@ -178,13 +184,13 @@ public class BattleManager : MonoBehaviour
         }
         if (waitingForNextShot) return; // 이미 대기중이면 중복 방지
 
-        if (!inventory.HasWeapons())
+        if (!Inventory.Instance.HasWeapons())
         {
             EndPlayerTurn();
             return;
         }
 
-        currentWeapon = inventory.GetNextWeapon();
+        currentWeapon = Inventory.Instance.GetNextWeapon();
         // slingshot은 Scene에서 연결되어야 함
         slingshot.Prepare(currentWeapon);
     }
@@ -261,7 +267,8 @@ public class BattleManager : MonoBehaviour
     public void EndBattle()
     {
         print("clear");
-
+        PoolingManager.Get.DestroyPool("Damage");
+        DataManager.Get.player.Init(player);
         SceneManager.LoadScene("MapScene");
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -5,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class StartSceneManager : MonoBehaviour
 {
+    public List<WeaponTemplate> weaponTemplates;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,6 +20,12 @@ public class StartSceneManager : MonoBehaviour
         {
             EventSystem.current.gameObject.SetActive(false);
             print("dfas");
+            GameObject obj = new GameObject();
+            obj.name = "Inventory";
+            Inventory inventroy = obj.AddComponent<Inventory>();
+            inventroy.weaponTemplates = weaponTemplates;
+
+            DataManager.Get.player.Init("Player", 100, 5);
             SceneManager.LoadScene("MapScene");
         }
     }
