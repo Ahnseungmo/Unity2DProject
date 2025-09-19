@@ -17,21 +17,22 @@ public class StageManager : MonoBehaviour
     public Sprite Home;
     public Sprite Battle;
     public Sprite Boss;
+    public MapCharacter character;
 
     [Header("Config")]
     public int TotalFloors;
     public int FloorWeight;
     public int RootSize;
 
-
+    private Vector2Int startStagePos = new Vector2Int(0,-1);
     //  MapGenerator mapGenerator = new MapGenerator();
 
     private Dictionary<MapNodeData, MapNodeComponent> nodeComponentMap = new Dictionary<MapNodeData, MapNodeComponent>();
 
     void Start()
     {
-
-        MapGenerator.Get.Generate(TotalFloors, FloorWeight, RootSize);
+        if(DataManager.Get.stagePos == startStagePos)
+            MapGenerator.Get.Generate(TotalFloors, FloorWeight, RootSize);
 
 
         // 1) 데이터 -> GameObject + 컴포넌트 생성 및 위치 지정
@@ -46,7 +47,7 @@ public class StageManager : MonoBehaviour
 
             comp.Data = nodeData;
             nodeComponentMap[nodeData] = comp;
-
+            comp.Data.mapNodeComponent = comp;
             Sprite sp;
             switch (comp.Data.mapType)
             {
@@ -100,5 +101,7 @@ public class StageManager : MonoBehaviour
                 lineObj.transform.rotation = Quaternion.Euler(0, 0, angle);
             }
         }
+
+        character.SetPos(DataManager.Get.stagePos);
     }
 }

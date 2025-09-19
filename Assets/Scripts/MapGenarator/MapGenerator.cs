@@ -16,11 +16,13 @@ public class MapNodeData
 
     public MapType mapType;
     public int index;
+    public MapNodeComponent mapNodeComponent;
 }
 
 public class MapGenerator : Singleton<MapGenerator>
 {
     public List<MapNodeData> AllNodes = new List<MapNodeData>();
+    public Vector2Int StartPos;
 
     // 랜덤 유니크 숫자 생성 함수
     private List<int> GetUniqueRandomNumbers(int count, int min, int max)
@@ -81,9 +83,17 @@ public class MapGenerator : Singleton<MapGenerator>
                 {
                     MapNodeData node = new MapNodeData
                     {
-                        Pos = pos,
-                        mapType = MapType.Battle
+                        Pos = pos
                     };
+                    if((pos.y+1) %5 == 0)
+                    {
+                        node.mapType = MapType.Home;
+                    }
+                    else
+                    {
+                        node.mapType = MapType.Battle;
+                    }
+
                     nodeDict.Add(key, node);
                     AllNodes.Add(node);
                 }
@@ -92,11 +102,13 @@ public class MapGenerator : Singleton<MapGenerator>
 
         //시작 node 생성
         {
-            MapNodeData node = new MapNodeData { Pos = new Vector2Int(floorWeight / 2, -1) };
+            StartPos = new Vector2Int(floorWeight / 2, -1);
+            MapNodeData node = new MapNodeData { Pos = StartPos };
             node.mapType = MapType.Home;
             nodeDict.Add((0, -1), node);
             AllNodes.Add(node);
 
+            DataManager.Get.stagePos = StartPos;
         }
 
 

@@ -35,5 +35,7 @@ public class DataManager : Singleton<DataManager>
 {
     public StageData stageData;
     public Player player = new Player();
+    public Vector2Int stagePos;
+    public bool moveAble = true;
 
 }

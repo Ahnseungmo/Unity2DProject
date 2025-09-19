@@ -239,6 +239,25 @@ Transform:
   - {fileID: 749004059}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &530745591 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9040891164891675178, guid: 838958e537fa1854aad34b9d90392014, type: 3}
+  m_PrefabInstance: {fileID: 2352768735959608688}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &530745592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530745591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f7f47faa5e826f4580f624bc2ae385f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  animator: {fileID: 2352768735959608689}
 --- !u!1 &740920531
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,6 +690,7 @@ MonoBehaviour:
   Home: {fileID: 21300000, guid: bad46a53134693c45935020c212602f2, type: 3}
   Battle: {fileID: 21300000, guid: d9a032a6c18ebcd4da25347fe66d635a, type: 3}
   Boss: {fileID: 21300000, guid: d63f54c5289a07a4f93ad426436907bd, type: 3}
+  character: {fileID: 530745592}
   TotalFloors: 10
   FloorWeight: 5
   RootSize: 3
@@ -699,11 +719,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 465092297641303676, guid: 838958e537fa1854aad34b9d90392014, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.58
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 465092297641303676, guid: 838958e537fa1854aad34b9d90392014, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.03
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 465092297641303676, guid: 838958e537fa1854aad34b9d90392014, type: 3}
       propertyPath: m_LocalPosition.z
@@ -796,14 +816,22 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9040891164891675178, guid: 838958e537fa1854aad34b9d90392014, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 530745592}
   m_SourcePrefab: {fileID: 100100000, guid: 838958e537fa1854aad34b9d90392014, type: 3}
+--- !u!95 &2352768735959608689 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3884604820753045183, guid: 838958e537fa1854aad34b9d90392014, type: 3}
+  m_PrefabInstance: {fileID: 2352768735959608688}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1792702992}
-  - {fileID: 2352768735959608688}
   - {fileID: 168276083}
   - {fileID: 91753577}
   - {fileID: 1694574238}
+  - {fileID: 2352768735959608688}

@@ -10,6 +10,7 @@ public class MapNode
 //    public List<MapNode> connections = new List<MapNode>();
     public List<MapNode> children;
     public List<MapNode> parent;
+
 }
 
 public enum NodeType

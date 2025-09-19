@@ -19,13 +19,15 @@ public class StartSceneManager : MonoBehaviour
         if (Keyboard.current.anyKey.isPressed || Mouse.current.leftButton.isPressed || Touchscreen.current.primaryTouch.press.isPressed || EventSystem.current.IsPointerOverGameObject())
         {
             EventSystem.current.gameObject.SetActive(false);
-            print("dfas");
+            print("MapScene ¿Ãµø");
             GameObject obj = new GameObject();
             obj.name = "Inventory";
             Inventory inventroy = obj.AddComponent<Inventory>();
             inventroy.weaponTemplates = weaponTemplates;
 
             DataManager.Get.player.Init("Player", 100, 5);
+            DataManager.Get.stagePos = new Vector2Int(0,-1);
+
             SceneManager.LoadScene("MapScene");
         }
     }

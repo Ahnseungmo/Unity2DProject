@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using static UnityEditor.PlayerSettings;
 
 public class NodePrefab : MonoBehaviour,IPointerClickHandler
 {
@@ -15,6 +16,10 @@ public class NodePrefab : MonoBehaviour,IPointerClickHandler
     void Start()
     {
         nodeComponent = GetComponent<MapNodeComponent>();
+        var playerNode = MapGenerator.Get.AllNodes.Find(s => s.Pos == DataManager.Get.stagePos);
+        var findNode = playerNode.mapNodeComponent.Children.Find(s => s.Data.Pos == nodeComponent.Data.Pos);
+        if (findNode == null) clickAble = false;
+        else clickAble = true;
     }
 
     // Update is called once per frame
@@ -26,10 +31,31 @@ public class NodePrefab : MonoBehaviour,IPointerClickHandler
     public void OnPointerClick(PointerEventData data)
     {
         print("노드 클릭");
-        if (!clickAble) return;
+        if (!clickAble || !DataManager.Get.moveAble) return;
+        
+        DataManager.Get.stagePos = nodeComponent.Data.Pos;
+
+        GameObject.Find("Character").GetComponent<MapCharacter>().MoveToPosition(this);
+        DataManager.Get.moveAble = false;
+    }
+    private void ClickAbleChirdren()
+    {
+        foreach(var node in nodeComponent.Children)
+        {
+//            node.Children.gameobject
+        }
+    }
+
+    public void NodeStart()
+    {
+        DataManager.Get.moveAble = true;
+        DataManager.Get.stagePos = nodeComponent.Data.Pos;
+
         switch (nodeComponent.Data.mapType)
-        { 
+        {
             case MapType.Home:
+
+                SceneManager.LoadScene("MapScene");
                 break;
             case MapType.Battle:
 
@@ -37,9 +63,9 @@ public class NodePrefab : MonoBehaviour,IPointerClickHandler
                 //        player.Init("Player", 100, 5);
                 // 최대 4마리 몬스터 추가
                 stage.monsters.Add(new MonsterData("Goblin", 50, 10));
- //               stage.monsters.Add(new MonsterData("Slime", 30, 5));
-//                stage.monsters.Add(new MonsterData("Orc", 80, 15));
-//                stage.monsters.Add(new MonsterData("Bat", 40, 8));
+                //               stage.monsters.Add(new MonsterData("Slime", 30, 5));
+                //                stage.monsters.Add(new MonsterData("Orc", 80, 15));
+                //                stage.monsters.Add(new MonsterData("Bat", 40, 8));
 
                 DataManager.Get.stageData = stage;
                 SceneManager.LoadScene("BattleScene");
@@ -48,13 +74,6 @@ public class NodePrefab : MonoBehaviour,IPointerClickHandler
                 break;
             default:
                 break;
-        }
-    }
-    private void ClickAbleChirdren()
-    {
-        foreach(var node in nodeComponent.Children)
-        {
-//            node.Children.gameobject
         }
     }
 }
